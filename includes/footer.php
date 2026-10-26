@@ -1,0 +1,1 @@
+</main><footer><div><b>Student Council Query Portal</b><p>Helping students get answers and stay informed.</p></div><span>© <?=date('Y')?> Student Council Portal</span></footer></body></html>
