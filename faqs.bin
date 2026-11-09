@@ -1,0 +1,30 @@
+<?php 
+require 'includes/bootstrap.php'; 
+
+$fs = []; 
+
+try {
+    $fs = db()->query('SELECT question, answer FROM faqs WHERE is_active = 1 ORDER BY id DESC')->fetchAll();
+} catch (Throwable $e) {
+    // Database connection ba query fail korle $fs empty thakbe
+} 
+
+$pageTitle = 'FAQs'; 
+require 'includes/header.php'; 
+?>
+
+<span class="eyebrow">HELP CENTER</span>
+<h1>Frequently asked questions</h1>
+
+<?php if (!$fs): ?>
+    <div class="empty">No FAQs found. Import database.sql first.</div>
+<?php endif; ?>
+
+<?php foreach ($fs as $f): ?>
+    <details class="faq">
+        <summary><?= e($f['question']) ?></summary>
+        <p><?= nl2br(e($f['answer'])) ?></p>
+    </details>
+<?php endforeach; ?>
+
+<?php require 'includes/footer.php'; ?>
